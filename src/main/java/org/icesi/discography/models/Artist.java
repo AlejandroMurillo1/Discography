@@ -15,6 +15,10 @@ public class Artist {
         this.tracks = tracks;
     }
 
+    public Artist() {
+
+    }
+
     public long getId() {
         return id;
     }

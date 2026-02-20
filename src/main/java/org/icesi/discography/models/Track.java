@@ -20,6 +20,10 @@ public class Track {
         this.singers = singers;
     }
 
+    public Track() {
+
+    }
+
     public long getId() {
         return id;
     }

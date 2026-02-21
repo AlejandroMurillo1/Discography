@@ -3,31 +3,30 @@ package org.icesi.discography.repositories;
 import org.icesi.discography.models.Artist;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ArtistRepository {
 
-    List<Artist> artists = new ArrayList<>();
+    private final List<Artist> artists = new ArrayList<>();
     private long currentArtistId;
 
     public List<Artist> getAllArtists() {
-
         return artists;
     }
 
     public void createArtist(Artist artist) {
-
         currentArtistId ++;
         artist.setId(currentArtistId);
         artists.add(artist);
     }
 
-    public void getArtisAndTracksByName(String artistName) {
-
-
+    public Artist getArtisAndTracksByName(String artistName) {
+        return artists.stream()
+                .filter(artist -> artist.getName().equalsIgnoreCase(artistName))
+                .findFirst().orElseThrow();
     }
 
     public void deleteArtist(Artist artist) {
-
         currentArtistId --;
         artist.setId(currentArtistId);
         artists.remove(artist);

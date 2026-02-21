@@ -1,35 +1,37 @@
 package org.icesi.discography.services;
 
 import org.icesi.discography.models.Artist;
-import org.icesi.discography.models.Track;
 import org.icesi.discography.repositories.ArtistRepository;
 
 import java.util.List;
 
 public class ArtistService {
 
-    ArtistRepository artistRepository;
-
+    private ArtistRepository artistRepository;
 
     public List<Artist> getAllArtists() {
         return artistRepository.getAllArtists();
     }
 
-    public void createArtist(Long id, String name, String nacionality) {
+    public void createArtist(long id, String name, String nationality) {
 
         Artist artists = new Artist();
 
         artists.setId(id);
         artists.setName(name);
-        artists.setNationality(nacionality);
+        artists.setNationality(nationality);
 
         artistRepository.createArtist(artists);
     }
 
-    public void addTrackToArtist(Long idUser, Long idTrack) {
+    public void addTrackToArtist(long idUser, long idTrack) {
 
 
 
+    }
+
+    public Artist getArtistWithTracks(String name){
+        return artistRepository.getArtisAndTracksByName(name);
     }
 
 }

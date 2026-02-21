@@ -9,23 +9,18 @@ import java.util.List;
 
 public class TrackService {
 
-    TrackRepository trackRepository;
-    Track track;
-    public List<Track> getTracks() {
+    private TrackRepository trackRepository;
 
+    public List<Track> getTracks() {
         return trackRepository.getAllTracks();
     }
 
-
-    public void createTrack(Long id, String title, String genre, Duration duration, String albumTitle, List<Artist> singers) {
-
-        track.setId(id);
-        track.setTitle(title);
-        track.setGenre(genre);
-        track.setDuration(duration);
-        track.setAlbumTitle(albumTitle);
-        track.setSingers(singers);
+    public void createTrack(long id, String title, String genre, int duration, String albumTitle, List<Artist> singers) {
+        Track track = new Track(id,title,genre,Duration.ofSeconds(duration),albumTitle,singers);
         trackRepository.saveTrack(track);
+    }
+
+    public void deleteTrack(long id){
 
     }
 

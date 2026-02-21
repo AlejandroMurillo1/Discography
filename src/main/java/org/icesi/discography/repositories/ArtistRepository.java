@@ -1,10 +1,13 @@
 package org.icesi.discography.repositories;
 
 import org.icesi.discography.models.Artist;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Component
 public class ArtistRepository {
 
     private final List<Artist> artists = new ArrayList<>();

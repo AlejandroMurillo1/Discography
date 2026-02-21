@@ -3,13 +3,21 @@ package org.icesi.discography.services;
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.models.Track;
 import org.icesi.discography.repositories.TrackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.List;
 
+@Component
 public class TrackService {
 
     private TrackRepository trackRepository;
+
+    @Autowired
+    public TrackService(TrackRepository trackRepository) {
+        this.trackRepository = trackRepository;
+    }
 
     public List<Track> getTracks() {
         return trackRepository.getAllTracks();

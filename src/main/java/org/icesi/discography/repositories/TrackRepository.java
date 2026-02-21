@@ -2,16 +2,18 @@ package org.icesi.discography.repositories;
 
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.models.Track;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class TrackRepository {
 
     //TODO: Concretar la lögica de creación de ID's.
     private final List<Track> tracks = new ArrayList<>();
-    private long currentArtistId = 0;
+    private long currentTrackId = 0;
 
     public List<Track> getAllTracks() {
         return tracks;
@@ -19,8 +21,8 @@ public class TrackRepository {
 
     public void saveTrack(Track track) {
 
-        currentArtistId ++;
-        track.setId(currentArtistId);
+        currentTrackId ++;
+        track.setId(currentTrackId);
         tracks.add(track);
     }
 

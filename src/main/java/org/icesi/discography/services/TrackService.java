@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class TrackService {
 
-    private TrackRepository trackRepository;
+    private final TrackRepository trackRepository;
 
     @Autowired
     public TrackService(TrackRepository trackRepository) {
@@ -24,7 +24,7 @@ public class TrackService {
     }
 
     public void createTrack(long id, String title, String genre, int duration, String albumTitle, List<Artist> singers) {
-        Track track = new Track(id,title,genre,Duration.ofSeconds(duration),albumTitle,singers);
+        Track track = new Track(id,title,genre,duration,albumTitle,singers);
         trackRepository.saveTrack(track);
     }
 

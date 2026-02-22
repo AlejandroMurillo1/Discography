@@ -7,15 +7,15 @@ public class Track {
     private long id;
     private String title;
     private String genre;
-    private Duration duration;
+    private long durationInSeconds;
     private String albumTitle;
     private List<Artist> singers;
 
-    public Track(long id, String title, String genre, Duration duration, String albumTitle, List<Artist> singers) {
+    public Track(long id, String title, String genre, long duration, String albumTitle, List<Artist> singers) {
         this.id = id;
         this.title = title;
         this.genre = genre;
-        this.duration = duration;
+        this.durationInSeconds = duration;
         this.albumTitle = albumTitle;
         this.singers = singers;
     }
@@ -45,12 +45,12 @@ public class Track {
         this.genre = genre;
     }
 
-    public Duration getDuration() {
-        return duration;
+    public long getDuration() {
+        return durationInSeconds;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setDuration(long duration) {
+        this.durationInSeconds = duration;
     }
 
     public String getAlbumTitle() {

@@ -1,6 +1,7 @@
 package org.icesi.discography.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.icesi.discography.models.Artist;
 import org.springframework.context.ApplicationContext;
@@ -40,38 +41,34 @@ public class ArtistSearchServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.setContentType("application/json");
 
-            String error = "{\"error\": \"Parámetro 'name' es obligatorio (ej: ?name=shakira)\", \"status\": 400}";
+            String error = String.format(
+                    "{\"error\": \"Parámetro 'name' es obligatorio (ej: ?name=shakira)\", \"status\": %d}",
+                    HttpServletResponse.SC_BAD_REQUEST
+            );
+
             resp.getWriter().write(error);
             return;
         }
 
         try {
-            Artist artist = artistService.getArtistWithTracks(name);
+
+            List<Artist> artists = artistService.searchArtists(name);
+
 
             resp.setContentType("application/json");
-            resp.getWriter().write(gson.toJson(artist));
+            resp.getWriter().write(gson.toJson(artists));
 
         } catch (Exception e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.setContentType("application/json");
 
-            if (e.getMessage() != null && e.getMessage().contains("no encontrado")) {
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                resp.setContentType("application/json");
+            String error = String.format(
+                    "{\"error\": \"Error al buscar artista: %s\", \"status\": %d}",
+                    e.getMessage(),
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+            );
 
-                String error = String.format(
-                    "{\"error\": \"Artista no encontrado con nombre: %s\", \"status\": 404}",
-                    name
-                );
-                resp.getWriter().write(error);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                resp.setContentType("application/json");
-
-                String error = String.format(
-                        "{\"error\": \"Error al buscar artista: %s\", \"status\": 500}",
-                        e.getMessage()
-                );
-                resp.getWriter().write(error);
-            }
+            resp.getWriter().write(error);
         }
     }
 }

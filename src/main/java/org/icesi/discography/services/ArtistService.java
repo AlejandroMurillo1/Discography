@@ -37,6 +37,10 @@ public class ArtistService {
 
     }
 
+    public List<Artist> searchArtists(String searchTerm) {
+        return artistRepository.searchArtistsByName(searchTerm);
+    }
+
     public void deleteArtistById(long id) {
         Artist artist = getArtistById(id);
         artistRepository.deleteArtist(artist);

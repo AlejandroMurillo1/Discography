@@ -63,7 +63,7 @@ public class ArtistListServlet extends HttpServlet {
 
     // DELETE borrar artistas por id
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         String pathInfo = req.getPathInfo();

@@ -11,7 +11,6 @@ import java.util.Optional;
 @Component
 public class TrackRepository {
 
-    //TODO: Concretar la lögica de creación de ID's.
     private final List<Track> tracks = new ArrayList<>();
     private long currentTrackId = 0;
 
@@ -20,20 +19,19 @@ public class TrackRepository {
     }
 
     public void saveTrack(Track track) {
-
         currentTrackId ++;
         track.setId(currentTrackId);
         tracks.add(track);
     }
 
-
-    public void deleteTrackById(long id) {
-
-        //Lambda pa obtener la canción por el id
-        Track toDelete = tracks.stream()
+    public Track getTrackById(long id){
+        return tracks.stream()
                 .filter(tr -> tr.getId() == id)
                 .findFirst()
                 .orElseThrow();
+    }
+
+    public void deleteTrack(Track toDelete) {
 
         // Por cada uno de los cantantes involucrados, se les quita esa canción
         toDelete.getSingers().forEach(a -> a.getTracks().remove(toDelete));

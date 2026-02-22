@@ -11,7 +11,7 @@ import java.util.Optional;
 public class ArtistRepository {
 
     private final List<Artist> artists = new ArrayList<>();
-    private long currentArtistId;
+    private long currentArtistId = 0;
 
     public List<Artist> getAllArtists() {
         return artists;

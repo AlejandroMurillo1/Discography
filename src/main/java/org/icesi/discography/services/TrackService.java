@@ -29,7 +29,12 @@ public class TrackService {
     }
 
     public void deleteTrack(long id){
+        Track toDelete = getTrackById(id);
+        trackRepository.deleteTrack(toDelete);
+    }
 
+    private Track getTrackById(long id){
+        return trackRepository.getTrackById(id);
     }
 
 

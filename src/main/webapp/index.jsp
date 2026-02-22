@@ -8,6 +8,8 @@
 <h1><%= "Discography Application" %>
 </h1>
 <br/>
-<a href="artists">Artists</a>
+<a href="${pageContext.request.contextPath}/artists">Artists</a>
+<a href="${pageContext.request.contextPath}/artists/search">Search Artist</a>
+<a href="${pageContext.request.contextPath}/artists/create"></a>
 </body>
 </html>

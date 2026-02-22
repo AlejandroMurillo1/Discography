@@ -19,11 +19,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/artists/")
+@WebServlet("/artists")
 public class ArtistListServlet extends HttpServlet {
 
     private ArtistService artistService;
-
     private final Gson gson = new Gson();
 
     @Override
@@ -33,7 +32,7 @@ public class ArtistListServlet extends HttpServlet {
                 .getRequiredWebApplicationContext(getServletContext());
 
         artistService = context.getBean(ArtistService.class);
-        }
+    }
 
     // GET: Listar artistas
     @Override
@@ -67,7 +66,6 @@ public class ArtistListServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         String pathInfo = req.getPathInfo();
         if (pathInfo == null || pathInfo.equals("/")) {
             return;
@@ -76,7 +74,6 @@ public class ArtistListServlet extends HttpServlet {
         try {
 
             long id = Long.parseLong(pathInfo.substring(1));
-
             artistService.deleteArtistById(id);
 
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);

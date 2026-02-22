@@ -17,7 +17,6 @@ public class ArtistService {
         this.artistRepository = artistRepository;
     }
 
-
     public List<Artist> getAllArtists() {
         return artistRepository.getAllArtists();
     }
@@ -43,7 +42,7 @@ public class ArtistService {
         artistRepository.deleteArtist(artist);
     }
 
-    public Artist getArtistById(long id) {
+    private Artist getArtistById(long id) {
         return artistRepository.getArtistById(id).orElseThrow(() -> new IllegalArgumentException("Artista no encontrado con ID: " + id));
     }
 

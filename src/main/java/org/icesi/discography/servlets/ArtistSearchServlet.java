@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ArtistSearchServlet extends HttpServlet {
 
     private ArtistService artistService;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public void init() throws ServletException {
@@ -33,7 +33,6 @@ public class ArtistSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
 
         String name = req.getParameter("name");
 
@@ -59,8 +58,8 @@ public class ArtistSearchServlet extends HttpServlet {
                 resp.setContentType("application/json");
 
                 String error = String.format(
-                        "{\"error\": \"Artista no encontrado con nombre: %s\", \"status\": 404}",
-                        name
+                    "{\"error\": \"Artista no encontrado con nombre: %s\", \"status\": 404}",
+                    name
                 );
                 resp.getWriter().write(error);
             } else {

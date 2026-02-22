@@ -9,7 +9,7 @@ public class Track {
     private String genre;
     private long durationInSeconds;
     private String albumTitle;
-    private List<Artist> singers;
+    private transient List<Artist> singers;
 
     public Track(long id, String title, String genre, long duration, String albumTitle, List<Artist> singers) {
         this.id = id;
@@ -20,6 +20,9 @@ public class Track {
         this.singers = singers;
     }
 
+    public long getDurationInSeconds() {
+        return durationInSeconds;
+    }
 
     public long getId() {
         return id;
@@ -45,10 +48,6 @@ public class Track {
         this.genre = genre;
     }
 
-    public long getDuration() {
-        return durationInSeconds;
-    }
-
     public void setDuration(long duration) {
         this.durationInSeconds = duration;
     }
@@ -67,5 +66,10 @@ public class Track {
 
     public void setSingers(List<Artist> singers) {
         this.singers = singers;
+    }
+
+    @Override
+    public String toString() {
+        return "Track{id=" + id + ", title='" + title + "', genre='" + genre + "'}";
     }
 }

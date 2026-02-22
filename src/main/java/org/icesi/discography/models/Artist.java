@@ -50,4 +50,9 @@ public class Artist {
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
+
+    @Override
+    public String toString() {
+        return "Artist{id=" + id + ", name='" + name + "', nationality='" + nationality + "'}";
+    }
 }

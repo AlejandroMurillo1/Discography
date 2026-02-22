@@ -11,8 +11,4 @@ public class DataWrapper {
     public List<Artist> getArtistList() {
         return artistList;
     }
-
-    public void setArtistList(List<Artist> artistList) {
-        this.artistList = artistList;
-    }
 }

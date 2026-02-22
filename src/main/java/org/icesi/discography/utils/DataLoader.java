@@ -1,6 +1,7 @@
 package org.icesi.discography.utils;
 
 import com.google.gson.Gson;
+import jakarta.annotation.PostConstruct;
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.models.Track;
 import org.icesi.discography.repositories.ArtistRepository;
@@ -9,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Objects;
 
 @Component
 public class DataLoader {
@@ -26,34 +27,43 @@ public class DataLoader {
         this.trackRepository = tr;
     }
 
+    @PostConstruct
+    public void init(){
+        boolean success = loadData();
+        if(success){
+            System.out.println("Operación de precarga exitosa.");
+        }
+    }
+
     public boolean loadData(){
         String jsonData = "data.json";
+        boolean result;
 
-        List<Artist> artists;
-        List<Track> tracks;
+        try(InputStreamReader reader = new InputStreamReader(
+                Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(jsonData)),StandardCharsets.UTF_8)){
 
-        try(InputStream is = getClass().getClassLoader().getResourceAsStream(jsonData)){
-            if(is == null){
-                System.err.println("No se encontró el archivo: "+jsonData);
-                return false;
-            }
-
-            InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
             DataWrapper data = gson.fromJson(reader,DataWrapper.class);
 
-            //TODO: Completar esta lógica.
             for(Artist a: data.getArtistList()){
+                if(a.getTracks() == null) a.setTracks(new ArrayList<>());
+
+                for(Track t: a.getTracks()){
+                    if(t.getSingers() == null) t.setSingers(new ArrayList<>());
+                    if(!t.getSingers().contains(a)) t.getSingers().add(a);
+
+                    trackRepository.saveTrack(t);
+                }
+
                 artistRepository.saveArtist(a);
             }
+            result = true;
 
         }catch(IOException ioException){
-
+            ioException.printStackTrace();
+            result = false;
         }
 
-
-
-
-        return true;
+        return result;
     }
 
     public ArtistRepository getArtistRepository() {

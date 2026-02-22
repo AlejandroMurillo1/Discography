@@ -1,11 +1,10 @@
 package org.icesi.discography.servlets;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonObject;
 import org.icesi.discography.models.Artist;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -20,8 +19,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/artists")
-public class ArtistServlet extends HttpServlet {
+@WebServlet("/artists/")
+public class ArtistListServlet extends HttpServlet {
 
     private ArtistService artistService;
 
@@ -34,12 +33,7 @@ public class ArtistServlet extends HttpServlet {
                 .getRequiredWebApplicationContext(getServletContext());
 
         artistService = context.getBean(ArtistService.class);
-
-        //NOTA: Estas lineas de codigo solo estan para confirmar que se esta haciendo la inyecion
-        //      de beans correctamente
-        System.out.println(" TEST:: Existe ArtistRepository? " + context.containsBean("artistRepository"));
-        System.out.println("TEST:: Existe ArtisService?? " + context.containsBean("artistService"));
-    }
+        }
 
     // GET: Listar artistas
     @Override
@@ -68,24 +62,46 @@ public class ArtistServlet extends HttpServlet {
         }
     }
 
-    // POST: Crear artista
+    // DELETE borrar artistas por id
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        StringBuilder json = new StringBuilder();
-        try (BufferedReader reader = req.getReader()) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                json.append(line);
-            }
+
+        String pathInfo = req.getPathInfo();
+        if (pathInfo == null || pathInfo.equals("/")) {
+            return;
         }
 
-        Map<String,String> data = gson.fromJson(json.toString(), HashMap.class);
+        try {
 
-        artistService.createArtist(data.get("name"),data.get("nationality"));
+            long id = Long.parseLong(pathInfo.substring(1));
 
-        resp.setStatus(HttpServletResponse.SC_CREATED);
-        resp.getWriter().println("Artista creado: " + data.get("name"));
+            artistService.deleteArtistById(id);
+
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+
+        } catch (NumberFormatException e) {
+            sendError(resp, HttpServletResponse.SC_BAD_REQUEST,
+                    "ID inválido (debe ser numérico)", e);
+        } catch (IllegalArgumentException e) {
+            sendError(resp, HttpServletResponse.SC_NOT_FOUND,
+                    e.getMessage(), e);
+        }
     }
+
+    private void sendError(HttpServletResponse resp, int status, String message, Exception e)
+            throws IOException {
+
+        resp.setStatus(status);
+        resp.setContentType("application/json");
+
+        JsonObject error = new JsonObject();
+        error.addProperty("error", message);
+        error.addProperty("details", e != null ? e.getMessage() : "N/A");
+
+        resp.getWriter().write(gson.toJson(error));
+    }
+
+
 }

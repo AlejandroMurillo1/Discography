@@ -22,7 +22,7 @@ public class ArtistService {
         return artistRepository.getAllArtists();
     }
 
-    public void createArtist( String name, String nationality) {
+    public Artist createArtist( String name, String nationality) {
 
         Artist artists = new Artist();
 
@@ -30,12 +30,21 @@ public class ArtistService {
         artists.setNationality(nationality);
 
         artistRepository.saveArtist(artists);
+
+        return artists;
     }
 
     public void addTrackToArtist(long idUser, long idTrack) {
 
+    }
 
+    public void deleteArtistById(long id) {
+        Artist artist = getArtistById(id);
+        artistRepository.deleteArtist(artist);
+    }
 
+    public Artist getArtistById(long id) {
+        return artistRepository.getArtistById(id).orElseThrow(() -> new IllegalArgumentException("Artista no encontrado con ID: " + id));
     }
 
     public Artist getArtistWithTracks(String name){

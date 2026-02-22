@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ArtistCreateServlet extends HttpServlet {
 
     private ArtistService artistService;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public void init() throws ServletException {
@@ -47,8 +47,6 @@ public class ArtistCreateServlet extends HttpServlet {
             jsonRequest = gson.fromJson(json.toString(), JsonObject.class);
             //MANEJOR DE ERRORES//
         } catch (Exception e) {
-
-
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.setContentType("application/json");
 
@@ -94,8 +92,7 @@ public class ArtistCreateServlet extends HttpServlet {
 
         try {
             Artist createdArtist = artistService.createArtist(name, nationality);
-
-
+            
             resp.setStatus(HttpServletResponse.SC_CREATED);
             resp.setContentType("application/json");
             resp.getWriter().write(gson.toJson(createdArtist));

@@ -4,7 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="artistRepository" class="org.icesi.discography.repositories.ArtistRepository"></bean>
-    <bean id="trackRepository" class="org.icesi.discography.repositories.TrackRepository"></bean>
+    <bean id="artistRepository" class="org.icesi.discography.repositories.ArtistRepository">
+
+    </bean>
+    <bean id="trackRepository" class="org.icesi.discography.repositories.TrackRepository">
+
+    </bean>
 
 </beans>

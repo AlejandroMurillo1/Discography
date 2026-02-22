@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Component
 public class ArtistRepository {
@@ -17,7 +16,7 @@ public class ArtistRepository {
         return artists;
     }
 
-    public void createArtist(Artist artist) {
+    public void saveArtist(Artist artist) {
         currentArtistId ++;
         artist.setId(currentArtistId);
         artists.add(artist);
@@ -34,8 +33,5 @@ public class ArtistRepository {
         artist.setId(currentArtistId);
         artists.remove(artist);
     }
-
-
-
 
 }

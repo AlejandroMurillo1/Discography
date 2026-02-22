@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class ArtistService {
 
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     @Autowired
     public ArtistService(ArtistRepository artistRepository) {
@@ -29,7 +29,7 @@ public class ArtistService {
         artists.setName(name);
         artists.setNationality(nationality);
 
-        artistRepository.createArtist(artists);
+        artistRepository.saveArtist(artists);
     }
 
     public void addTrackToArtist(long idUser, long idTrack) {

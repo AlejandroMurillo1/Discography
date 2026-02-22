@@ -25,14 +25,13 @@ public class ArtistServlet extends HttpServlet {
 
     private ArtistService artistService;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public void init() throws ServletException {
 
         ApplicationContext context = WebApplicationContextUtils
                 .getRequiredWebApplicationContext(getServletContext());
-
 
         artistService = context.getBean(ArtistService.class);
 
@@ -50,6 +49,8 @@ public class ArtistServlet extends HttpServlet {
         try {
 
             List<Artist> artists = artistService.getAllArtists();
+
+            System.out.println("Artists: "+ artists.get(0).toString());
 
             resp.setContentType("application/json");
             String rp = gson.toJson(artists);
@@ -80,7 +81,7 @@ public class ArtistServlet extends HttpServlet {
             }
         }
 
-        Map<String, String> data = gson.fromJson(json.toString(), HashMap.class);
+        Map<String,String> data = gson.fromJson(json.toString(), HashMap.class);
 
         artistService.createArtist(data.get("name"),data.get("nationality"));
 

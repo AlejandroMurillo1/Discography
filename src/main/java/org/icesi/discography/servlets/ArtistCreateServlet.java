@@ -36,7 +36,6 @@ public class ArtistCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         JsonObject jsonRequest;
         try (BufferedReader reader = req.getReader()) {
             StringBuilder json = new StringBuilder();
@@ -63,33 +62,16 @@ public class ArtistCreateServlet extends HttpServlet {
         String name = jsonRequest.has("name") ? jsonRequest.get("name").getAsString() : null;
         String nationality = jsonRequest.has("nationality") ? jsonRequest.get("nationality").getAsString() : null;
 
-        if (name == null || name.trim().isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            resp.setContentType("application/json");
-
-            String error = String.format(
-                    "{\"error\": \"El campo 'name' es obligatorio\", \"status\": %d}",
-                    HttpServletResponse.SC_BAD_REQUEST
-            );
-
-            resp.getWriter().write(error);
+        if(checkParam(name)) {
+            sendError(resp);
             return;
         }
 
-        if (nationality == null || nationality.trim().isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            resp.setContentType("application/json");
-
-            String error = String.format(
-                    "{\"error\": \"El campo 'nationality' es obligatorio\", \"status\": %d}",
-                    HttpServletResponse.SC_BAD_REQUEST
-            );
-
-            resp.getWriter().write(error);
+        if(checkParam(nationality)){
+            sendError(resp);
             return;
         }
-
-
+        
         try {
             Artist createdArtist = artistService.createArtist(name, nationality);
             
@@ -110,5 +92,21 @@ public class ArtistCreateServlet extends HttpServlet {
 
             resp.getWriter().write(error);
         }
+    }
+
+    private boolean checkParam(String param){
+        return param == null || param.trim().isEmpty();
+    }
+
+    private void sendError(HttpServletResponse resp) throws IOException {
+        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        resp.setContentType("application/json");
+
+        String error = String.format(
+                "{\"error\": \"El campo 'nationality' es obligatorio\", \"status\": %d}",
+                HttpServletResponse.SC_BAD_REQUEST
+        );
+
+        resp.getWriter().write(error);
     }
 }

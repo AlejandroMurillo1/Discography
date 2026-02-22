@@ -21,16 +21,16 @@ public class ArtistService {
         return artistRepository.getAllArtists();
     }
 
-    public Artist createArtist( String name, String nationality) {
+    public Artist createArtist(String name, String nationality) {
 
-        Artist artists = new Artist();
+        Artist artist = new Artist();
 
-        artists.setName(name);
-        artists.setNationality(nationality);
+        artist.setName(name);
+        artist.setNationality(nationality);
 
-        artistRepository.saveArtist(artists);
+        artistRepository.saveArtist(artist);
 
-        return artists;
+        return artist;
     }
 
     public void addTrackToArtist(long idUser, long idTrack) {

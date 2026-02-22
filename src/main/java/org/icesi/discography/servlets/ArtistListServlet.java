@@ -43,8 +43,6 @@ public class ArtistListServlet extends HttpServlet {
 
             List<Artist> artists = artistService.getAllArtists();
 
-            System.out.println("Artists: "+ artists.get(0).toString());
-
             resp.setContentType("application/json");
             String rp = gson.toJson(artists);
 

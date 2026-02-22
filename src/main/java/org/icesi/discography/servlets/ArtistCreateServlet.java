@@ -71,7 +71,7 @@ public class ArtistCreateServlet extends HttpServlet {
             sendError(resp);
             return;
         }
-        
+
         try {
             Artist createdArtist = artistService.createArtist(name, nationality);
             

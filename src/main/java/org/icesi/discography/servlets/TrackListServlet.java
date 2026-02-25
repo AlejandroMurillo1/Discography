@@ -1,14 +1,13 @@
 package org.icesi.discography.servlets;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/tracks/list")
+
 public class TrackListServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
@@ -16,12 +15,10 @@ public class TrackListServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/tracks/list.jsp")
+                .forward(req, resp);
     }
 }

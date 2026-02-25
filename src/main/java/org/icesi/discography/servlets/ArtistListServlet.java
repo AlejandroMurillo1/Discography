@@ -14,12 +14,10 @@ import com.google.gson.Gson;
 import org.icesi.discography.services.ArtistService;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/artists")
 public class ArtistListServlet extends HttpServlet {
 
     private ArtistService artistService;
@@ -61,7 +59,7 @@ public class ArtistListServlet extends HttpServlet {
 
     // DELETE borrar artistas por id
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         String pathInfo = req.getPathInfo();

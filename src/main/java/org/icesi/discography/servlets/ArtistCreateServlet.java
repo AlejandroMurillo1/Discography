@@ -3,6 +3,7 @@ package org.icesi.discography.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import jakarta.servlet.annotation.WebServlet;
 import org.icesi.discography.models.Artist;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet("/artists/create")
 public class ArtistCreateServlet extends HttpServlet {
 
     private ArtistService artistService;

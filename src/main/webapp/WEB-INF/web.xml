@@ -4,70 +4,70 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-        <!-- TrackListServlet -->
-        <servlet>
-            <servlet-name>TrackListServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.TrackListServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; TrackListServlet &ndash;&gt;-->
+<!--        <servlet>-->
+<!--            <servlet-name>TrackListServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.TrackListServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>TrackListServlet</servlet-name>
-            <url-pattern>/tracks/list</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>TrackListServlet</servlet-name>-->
+<!--            <url-pattern>/tracks/list</url-pattern>-->
+<!--        </servlet-mapping>-->
 
-        <!-- TrackCreateServlet -->
-        <servlet>
-            <servlet-name>TrackCreateServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.TrackCreateServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; TrackCreateServlet &ndash;&gt;-->
+<!--        <servlet>-->
+<!--            <servlet-name>TrackCreateServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.TrackCreateServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>TrackCreateServlet</servlet-name>
-            <url-pattern>/tracks/create</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>TrackCreateServlet</servlet-name>-->
+<!--            <url-pattern>/tracks/create</url-pattern>-->
+<!--        </servlet-mapping>-->
 
-        <!-- ArtistSearchServlet -->
-         <servlet>
-            <servlet-name>ArtistSearchServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.ArtistSearchServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; ArtistSearchServlet &ndash;&gt;-->
+<!--         <servlet>-->
+<!--            <servlet-name>ArtistSearchServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.ArtistSearchServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>ArtistSearchServlet</servlet-name>
-            <url-pattern>/artists/search</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>ArtistSearchServlet</servlet-name>-->
+<!--            <url-pattern>/artists/search</url-pattern>-->
+<!--        </servlet-mapping>-->
 
-        <!-- ArtistManagementServlet -->
-         <servlet>
-            <servlet-name>ArtistManagementServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.ArtistManagementServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; ArtistManagementServlet &ndash;&gt;-->
+<!--         <servlet>-->
+<!--            <servlet-name>ArtistManagementServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.ArtistManagementServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>ArtistManagementServlet</servlet-name>
-            <url-pattern>/artists/dashboard</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>ArtistManagementServlet</servlet-name>-->
+<!--            <url-pattern>/artists/dashboard</url-pattern>-->
+<!--        </servlet-mapping>-->
 
-        <!-- ArtistListServlet -->
-         <servlet>
-            <servlet-name>ArtistListServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.ArtistListServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; ArtistListServlet &ndash;&gt;-->
+<!--         <servlet>-->
+<!--            <servlet-name>ArtistListServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.ArtistListServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>ArtistListServlet</servlet-name>
-            <url-pattern>/artists</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>ArtistListServlet</servlet-name>-->
+<!--            <url-pattern>/artists</url-pattern>-->
+<!--        </servlet-mapping>-->
 
-        <!-- ArtistCreateServlet -->
-         <servlet>
-            <servlet-name>ArtistCreateServlet</servlet-name>
-            <servlet-class>org.icesi.discography.servlets.ArtistCreateServlet</servlet-class>
-        </servlet>
+<!--        &lt;!&ndash; ArtistCreateServlet &ndash;&gt;-->
+<!--         <servlet>-->
+<!--            <servlet-name>ArtistCreateServlet</servlet-name>-->
+<!--            <servlet-class>org.icesi.discography.servlets.ArtistCreateServlet</servlet-class>-->
+<!--        </servlet>-->
 
-        <servlet-mapping>
-            <servlet-name>ArtistCreateServlet</servlet-name>
-            <url-pattern>/artists/create</url-pattern>
-        </servlet-mapping>
+<!--        <servlet-mapping>-->
+<!--            <servlet-name>ArtistCreateServlet</servlet-name>-->
+<!--            <url-pattern>/artists/create</url-pattern>-->
+<!--        </servlet-mapping>-->
 
 </web-app>

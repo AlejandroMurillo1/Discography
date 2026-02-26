@@ -1,4 +1,4 @@
-/*package org.icesi.discography.config;
+package org.icesi.discography.config;
 
 import org.jspecify.annotations.NonNull;
 import org.springframework.web.WebApplicationInitializer;
@@ -21,4 +21,4 @@ public class Initializer implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(context));
 
     }
-}*/
+}

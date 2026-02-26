@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
+import jakarta.servlet.annotation.WebServlet;
 import org.icesi.discography.models.Artist;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -18,6 +19,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet("/artists")
 public class ArtistListServlet extends HttpServlet {
 
     private ArtistService artistService;

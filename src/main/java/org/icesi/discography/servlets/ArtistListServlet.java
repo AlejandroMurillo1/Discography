@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
+import jakarta.servlet.annotation.WebServlet;
 import org.icesi.discography.models.Artist;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -14,7 +15,6 @@ import com.google.gson.Gson;
 import org.icesi.discography.services.ArtistService;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -61,7 +61,7 @@ public class ArtistListServlet extends HttpServlet {
 
     // DELETE borrar artistas por id
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         String pathInfo = req.getPathInfo();

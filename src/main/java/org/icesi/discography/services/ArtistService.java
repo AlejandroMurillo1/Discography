@@ -3,11 +3,11 @@ package org.icesi.discography.services;
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.repositories.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class ArtistService {
 
     private final ArtistRepository artistRepository;

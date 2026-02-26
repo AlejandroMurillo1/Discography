@@ -4,12 +4,11 @@ import org.icesi.discography.models.Artist;
 import org.icesi.discography.models.Track;
 import org.icesi.discography.repositories.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.List;
 
-@Component
+@Service
 public class TrackService {
 
     private final TrackRepository trackRepository;

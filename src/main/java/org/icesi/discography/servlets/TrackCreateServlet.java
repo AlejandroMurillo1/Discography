@@ -1,5 +1,9 @@
 package org.icesi.discography.servlets;
 
+import org.icesi.discography.services.TrackService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,9 +14,13 @@ import java.io.IOException;
 
 @WebServlet("/tracks/create")
 public class TrackCreateServlet extends HttpServlet {
+
+    private TrackService trackService;
+    
     @Override
     public void init() throws ServletException {
-
+        ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+        this.trackService = applicationContext.getBean(TrackService.class);
     }
 
     @Override

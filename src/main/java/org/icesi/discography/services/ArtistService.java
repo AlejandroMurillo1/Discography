@@ -2,17 +2,14 @@ package org.icesi.discography.services;
 
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.repositories.ArtistRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
 
-    @Autowired
+    // Constructor para inyectar la dependencia del repositorio
     public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }
@@ -34,7 +31,7 @@ public class ArtistService {
     }
 
     public void addTrackToArtist(long idUser, long idTrack) {
-
+        // no se toca
     }
 
     public List<Artist> searchArtists(String searchTerm) {

@@ -14,7 +14,7 @@ public class ArtistManagementServlet extends HttpServlet {
                          HttpServletResponse resp)
             throws ServletException, IOException {
 
-        req.getRequestDispatcher("/WEB-INF/views/ArtistsDashboard.jsp")
+        req.getRequestDispatcher("/WEB-INF/views/artists-dashboard.jsp")
                 .forward(req, resp);
     }
 }

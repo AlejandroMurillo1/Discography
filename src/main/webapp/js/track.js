@@ -158,7 +158,7 @@ function mostrarCanciones(tracks) {
                 </div>
                 <div class="track-info">
                     <div class="track-label">Duración</div>
-                    <div class="track-value">${formatDuration(track.duration)}</div>
+                    <div class="track-value">${formatDuration(track.durationInSeconds)}</div>
                 </div>
                 <div class="track-info">
                     <div class="track-label">ID</div>

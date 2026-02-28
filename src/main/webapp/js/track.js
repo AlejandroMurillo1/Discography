@@ -1,7 +1,3 @@
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     cargarTodasLasCanciones();
 
@@ -122,8 +118,9 @@ function eliminarCancion(id) {
     }
 
 
-    fetch(`${BASE_PATH}/tracks/${id}`, { method: 'DELETE' })
-        .then(response => {
+    fetch(`${BASE_PATH}/tracks/delete/${id}`, {
+        method: 'POST'
+    }).then(response => {
             if (response.ok) {
                 cargarTodasLasCanciones();
                 alert('Canción eliminada exitosamente');
@@ -202,3 +199,6 @@ function mostrarMensaje(element, mensaje, tipo) {
         element.style.display = 'none';
     }, 5000);
 }
+
+
+

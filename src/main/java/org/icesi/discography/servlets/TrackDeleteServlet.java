@@ -13,7 +13,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/tracks/delete")
+@WebServlet("/tracks/delete/*")
 public class TrackDeleteServlet extends HttpServlet {
 
     private TrackService trackService;

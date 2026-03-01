@@ -32,15 +32,14 @@ public class TrackRepository {
     }
 
     public void deleteTrack(Track toDelete) {
-
-        // Por cada uno de los cantantes involucrados, se les quita esa canción
         toDelete.getSingers().forEach(a -> a.getTracks().remove(toDelete));
-
-        //Liberar recursos de lista
         toDelete.getSingers().clear();
-
-        //Eliminar definitivamente la canción
         tracks.remove(toDelete);
+    }
+
+    public void assignArtistsToTrack(List<Artist> artists, Track track){
+        List<Artist> trackArtists = track.getSingers();
+        trackArtists.addAll(artists);
     }
 
 }

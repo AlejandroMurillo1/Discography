@@ -174,6 +174,6 @@ El usuario que aparece realizando los commits como "K0R0Zz" corresponden a José
 
 ### Autores
 
-José David Valdés
-Alejandro Murillo 
-Damy Villegas 
+* José David Valdés
+* Alejandro Murillo
+* Damy Villegas 

@@ -8,9 +8,6 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/track.css">
-
-  <!-- Favicon opcional -->
-  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
 </head>
 <body>
 <div class="container">
@@ -44,8 +41,14 @@
           <input type="text" id="albumTitle" placeholder="Ej: Vida">
         </div>
 
-        <button onclick="crearCancion()">Crear Canción</button>
+        <div class="form-group">
+          <label>Asignar artistas</label>
+          <div id="artistCheckboxes" class="artist-checkboxes">
+            <!-- Checkboxes se cargarán dinámicamente -->
+          </div>
+        </div>
 
+        <button onclick="crearCancion()">Crear Canción</button>
         <div id="createMessage" class="message"></div>
       </div>
     </div>
@@ -56,12 +59,7 @@
       <div class="panel-content">
         <div class="form-group">
           <div class="track-search">
-            <input
-                    type="text"
-                    id="searchTerm"
-                    placeholder="Buscar por título..."
-                    autocomplete="off"
-            >
+            <input type="text" id="searchTerm" placeholder="Buscar por título..." autocomplete="off">
             <button onclick="buscarCancion()">🔍 Buscar</button>
           </div>
         </div>

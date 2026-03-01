@@ -33,10 +33,6 @@ public class ArtistService {
         return artist;
     }
 
-    public void addTrackToArtist(long idUser, long idTrack) {
-
-    }
-
     public List<Artist> searchArtists(String searchTerm) {
         return artistRepository.searchArtistsByName(searchTerm);
     }
@@ -46,7 +42,7 @@ public class ArtistService {
         artistRepository.deleteArtist(artist);
     }
 
-    private Artist getArtistById(long id) {
+    public Artist getArtistById(long id) {
         return artistRepository.getArtistById(id).orElseThrow(() -> new IllegalArgumentException("Artista no encontrado con ID: " + id));
     }
 

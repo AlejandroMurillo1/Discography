@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonElement;
 import org.icesi.discography.models.Artist;
 import org.icesi.discography.models.Track;
 import org.springframework.context.ApplicationContext;
@@ -83,31 +84,37 @@ public class TrackCreateServlet extends HttpServlet {
             return;
         }
 
-        // 4. Procesar cantantes (opcional)
-        List<Artist> singers = new ArrayList<>();
-        if (jsonRequest.has("singers")) {
-            JsonArray singersJson = jsonRequest.getAsJsonArray("singers");
-            // Aquí deberías tener lógica para convertir JSON a Artist
-            // Por ahora, pasamos una lista vacía o null
-            // En un sistema real, necesitarías obtener los artistas de la base
+        // 4. Extraer IDs de artistas si vienen
+        List<Long> artistIds = new ArrayList<>();
+        if (jsonRequest.has("artistIds")) {
+            try {
+                JsonArray idsArray = jsonRequest.getAsJsonArray("artistIds");
+                for (JsonElement elem : idsArray) {
+                    artistIds.add(elem.getAsLong());
+                }
+            } catch (Exception e) {
+                sendError(resp, "El campo 'artistIds' debe ser un arreglo de números",
+                        HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
         }
 
-        // 5. Crear pista usando TU constructor
         try {
-            trackService.createTrack(
-                    0L,           // ID será generado automáticamente
-                    title,
-                    genre,
-                    (int) duration, // Asumiendo que duration es int en el servicio
-                    albumTitle,
-                    singers       // Lista de cantantes (puede estar vacía)
-            );
 
-            // 6. Respuesta exitosa - devolveremos un objeto similar al creado
+            Track createdTrack = trackService.createTrack(0L, title, genre, (int) duration, albumTitle, new ArrayList<>());
+
+            if (!artistIds.isEmpty()) {
+                trackService.assignArtistsToTrack(artistIds, createdTrack.getId());
+            }
+
+            // 7. Respuesta exitosa
             JsonObject response = new JsonObject();
             response.addProperty("message", "Canción creada exitosamente");
-            response.addProperty("title", title);
-            response.addProperty("genre", genre);
+            response.addProperty("id", createdTrack.getId());
+            response.addProperty("title", createdTrack.getTitle());
+            response.addProperty("genre", createdTrack.getGenre());
+            response.addProperty("durationInSeconds", createdTrack.getDurationInSeconds());
+            response.addProperty("albumTitle", createdTrack.getAlbumTitle());
 
             resp.setStatus(HttpServletResponse.SC_CREATED);
             resp.setContentType("application/json");

@@ -77,8 +77,18 @@ function buscarArtista() {
             document.getElementById('artistsContainer').innerHTML =
                 '<div class="no-results">No se encontraron artistas que coincidan con la búsqueda</div>';
         });
+        fetch('/discography_war_exploded/artists/1', {
+        method: 'DELETE'
+         })
+         .then(response => {
+         if (response.status === 204) {
+         console.log('Artista eliminado correctamente');
+         }
+         });
 }
 
+
+// Función para cargar todos los artistas
 function cargarArtistas() {
     document.getElementById('artistsContainer').innerHTML =
         '<div class="no-results">Cargando artistas...</div>';
@@ -132,6 +142,28 @@ function mostrarArtistas(artists) {
 
 }
 
+//funcion borrar artistas
+function eliminarArtista(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar este artista? Esta acción no se puede deshacer.')) {
+        return;
+    }
+    
+    fetch(`${BASE_PATH}/artists/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            cargarTodosLosArtistas(); 
+            alert('Artista eliminado exitosamente');
+        } else {
+            throw new Error('Error al eliminar');
+        }
+    })
+    .catch(error => {
+        alert('Error al eliminar el artista');
+    });
+}
+
 // Función para mostrar mensajes
 function mostrarMensaje(element, mensaje, tipo) {
     element.textContent = mensaje;
@@ -143,4 +175,6 @@ function mostrarMensaje(element, mensaje, tipo) {
         element.style.display = 'none';
     }, 5000);
 }
+
+
 

@@ -1,0 +1,124 @@
+{
+  "artistList": [
+    {
+      "id": 1,
+      "name": "Héctor Lavoe",
+      "nationality": "Puerto Rico",
+      "tracks": [
+        { "id": 101, "title": "Periódico de Ayer", "genre": "Salsa", "durationInSeconds": 400, "albumTitle": "De Ti Depende" },
+        { "id": 102, "title": "El Cantante", "genre": "Salsa", "durationInSeconds": 602, "albumTitle": "Comedia" },
+        { "id": 103, "title": "Juanito Alimaña", "genre": "Salsa", "durationInSeconds": 441, "albumTitle": "Vigilante" },
+        { "id": 104, "title": "Todo Tiene Su Final", "genre": "Salsa", "durationInSeconds": 300, "albumTitle": "Lo Mato" },
+        { "id": 105, "title": "Triste y Vacía", "genre": "Salsa", "durationInSeconds": 365, "albumTitle": "Reventó" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Soda Stereo",
+      "nationality": "Argentina",
+      "tracks": [
+        { "id": 106, "title": "De Música Ligera", "genre": "Rock", "durationInSeconds": 213, "albumTitle": "Canción Animal" },
+        { "id": 107, "title": "Persiana Americana", "genre": "Rock", "durationInSeconds": 292, "albumTitle": "Signos" },
+        { "id": 108, "title": "En la Ciudad de la Furia", "genre": "Rock", "durationInSeconds": 347, "albumTitle": "Doble Vida" },
+        { "id": 109, "title": "Cuando Pase el Temblor", "genre": "Rock", "durationInSeconds": 229, "albumTitle": "Nada Personal" },
+        { "id": 110, "title": "Trátame Suavemente", "genre": "Rock", "durationInSeconds": 205, "albumTitle": "Soda Stereo" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Daddy Yankee",
+      "nationality": "Puerto Rico",
+      "tracks": [
+        { "id": 111, "title": "Gasolina", "genre": "Reggaeton", "durationInSeconds": 192, "albumTitle": "Barrio Fino" },
+        { "id": 112, "title": "Lo Que Pasó, Pasó", "genre": "Reggaeton", "durationInSeconds": 210, "albumTitle": "Barrio Fino" },
+        { "id": 113, "title": "Rompe", "genre": "Reggaeton", "durationInSeconds": 188, "albumTitle": "Barrio Fino: En Directo" },
+        { "id": 114, "title": "Despacito", "genre": "Reggaeton", "durationInSeconds": 228, "albumTitle": "Vida" },
+        { "id": 115, "title": "Pose", "genre": "Reggaeton", "durationInSeconds": 217, "albumTitle": "Talento de Barrio" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Queen",
+      "nationality": "United Kingdom",
+      "tracks": [
+        { "id": 116, "title": "Bohemian Rhapsody", "genre": "Rock", "durationInSeconds": 354, "albumTitle": "A Night at the Opera" },
+        { "id": 117, "title": "Don't Stop Me Now", "genre": "Rock", "durationInSeconds": 209, "albumTitle": "Jazz" },
+        { "id": 118, "title": "Under Pressure", "genre": "Rock", "durationInSeconds": 248, "albumTitle": "Hot Space" },
+        { "id": 119, "title": "We Will Rock You", "genre": "Rock", "durationInSeconds": 121, "albumTitle": "News of the World" },
+        { "id": 120, "title": "Killer Queen", "genre": "Rock", "durationInSeconds": 180, "albumTitle": "Sheer Heart Attack" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Shakira",
+      "nationality": "Colombia",
+      "tracks": [
+        { "id": 121, "title": "Hips Don't Lie", "genre": "Pop", "durationInSeconds": 218, "albumTitle": "Oral Fixation Vol. 2" },
+        { "id": 122, "title": "Antología", "genre": "Pop", "durationInSeconds": 251, "albumTitle": "Pies Descalzos" },
+        { "id": 123, "title": "Estoy Aquí", "genre": "Pop", "durationInSeconds": 232, "albumTitle": "Pies Descalzos" },
+        { "id": 124, "title": "Waka Waka", "genre": "Pop", "durationInSeconds": 202, "albumTitle": "Listen Up!" },
+        { "id": 125, "title": "Ojos Así", "genre": "Pop", "durationInSeconds": 237, "albumTitle": "¿Dónde Están los Ladrones?" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Rubén Blades",
+      "nationality": "Panama",
+      "tracks": [
+        { "id": 126, "title": "Pedro Navaja", "genre": "Salsa", "durationInSeconds": 441, "albumTitle": "Siembra" },
+        { "id": 127, "title": "Amor y Control", "genre": "Salsa", "durationInSeconds": 352, "albumTitle": "Amor y Control" },
+        { "id": 128, "title": "Plástico", "genre": "Salsa", "durationInSeconds": 400, "albumTitle": "Siembra" },
+        { "id": 129, "title": "Decisiones", "genre": "Salsa", "durationInSeconds": 300, "albumTitle": "Buscando América" },
+        { "id": 130, "title": "Siembra", "genre": "Salsa", "durationInSeconds": 320, "albumTitle": "Siembra" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "The Beatles",
+      "nationality": "United Kingdom",
+      "tracks": [
+        { "id": 131, "title": "Hey Jude", "genre": "Rock", "durationInSeconds": 431, "albumTitle": "Hey Jude" },
+        { "id": 132, "title": "Let It Be", "genre": "Rock", "durationInSeconds": 243, "albumTitle": "Let It Be" },
+        { "id": 133, "title": "Yesterday", "genre": "Rock", "durationInSeconds": 125, "albumTitle": "Help!" },
+        { "id": 134, "title": "Come Together", "genre": "Rock", "durationInSeconds": 259, "albumTitle": "Abbey Road" },
+        { "id": 135, "title": "Help!", "genre": "Rock", "durationInSeconds": 138, "albumTitle": "Help!" }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Diomedes Díaz",
+      "nationality": "Colombia",
+      "tracks": [
+        { "id": 136, "title": "Sin Medir Distancias", "genre": "Vallenato", "durationInSeconds": 285, "albumTitle": "Brindo con el Alma" },
+        { "id": 137, "title": "Tú Eres la Reina", "genre": "Vallenato", "durationInSeconds": 270, "albumTitle": "Título de Amor" },
+        { "id": 138, "title": "La Suerte Está Echada", "genre": "Vallenato", "durationInSeconds": 300, "albumTitle": "Muchas Gracias" },
+        { "id": 139, "title": "Mi Primera Cana", "genre": "Vallenato", "durationInSeconds": 310, "albumTitle": "26 de Mayo" },
+        { "id": 140, "title": "Amarte Más No Puedo", "genre": "Vallenato", "durationInSeconds": 290, "albumTitle": "Canta Conmigo" }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Michael Jackson",
+      "nationality": "USA",
+      "tracks": [
+        { "id": 141, "title": "Billie Jean", "genre": "Pop", "durationInSeconds": 294, "albumTitle": "Thriller" },
+        { "id": 142, "title": "Thriller", "genre": "Pop", "durationInSeconds": 357, "albumTitle": "Thriller" },
+        { "id": 143, "title": "Beat It", "genre": "Pop", "durationInSeconds": 258, "albumTitle": "Thriller" },
+        { "id": 144, "title": "Smooth Criminal", "genre": "Pop", "durationInSeconds": 257, "albumTitle": "Bad" },
+        { "id": 145, "title": "Black or White", "genre": "Pop", "durationInSeconds": 202, "albumTitle": "Dangerous" }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Daft Punk",
+      "nationality": "France",
+      "tracks": [
+        { "id": 146, "title": "Get Lucky", "genre": "Electronic", "durationInSeconds": 248, "albumTitle": "Random Access Memories" },
+        { "id": 147, "title": "One More Time", "genre": "Electronic", "durationInSeconds": 320, "albumTitle": "Discovery" },
+        { "id": 148, "title": "Around the World", "genre": "Electronic", "durationInSeconds": 429, "albumTitle": "Homework" },
+        { "id": 149, "title": "Instant Crush", "genre": "Electronic", "durationInSeconds": 337, "albumTitle": "Random Access Memories" },
+        { "id": 150, "title": "Harder, Better, Faster, Stronger", "genre": "Electronic", "durationInSeconds": 224, "albumTitle": "Discovery" }
+      ]
+    }
+  ]
+}

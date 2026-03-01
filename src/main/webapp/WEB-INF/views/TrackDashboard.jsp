@@ -82,6 +82,14 @@
 <!-- Scripts -->
 <script>
   const BASE_PATH = '${pageContext.request.contextPath}';
+  console.log('BASE_PATH:', BASE_PATH);
+  console.log('¿crearCancion está definida?', typeof crearCancion);
+  // Depuración adicional
+  console.log('Scripts cargados:', {
+    hasBasePath: typeof BASE_PATH !== 'undefined',
+    basePathValue: typeof BASE_PATH !== 'undefined' ? BASE_PATH : 'n/a',
+    hasCrearCancion: typeof crearCancion !== 'undefined'
+  });
 </script>
 <script src="${pageContext.request.contextPath}/js/track.js"></script>
 </body>

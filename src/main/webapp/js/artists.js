@@ -7,19 +7,17 @@ function crearArtista() {
     const nationality = document.getElementById('nationality').value.trim();
     const messageDiv = document.getElementById('createMessage');
 
-    // Validación
     if (!name || !nationality) {
         mostrarMensaje(messageDiv, 'Por favor completa ambos campos', 'error');
         return;
     }
 
-    // Preparar datos
     const artistData = {
         name: name,
         nationality: nationality
     };
 
-    fetch('/discography_war_exploded/artists/create', {
+    fetch(`${BASE_PATH}/artists/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +34,7 @@ function crearArtista() {
             mostrarMensaje(messageDiv, `¡Artista creado exitosamente! ID: ${data.id}`, 'success');
             document.getElementById('name').value = '';
             document.getElementById('nationality').value = '';
-            cargarArtistas(); // Actualizar lista
+            cargarArtistas();
         })
         .catch(error => {
             const errorMsg = error.error || 'Error desconocido al crear el artista';
@@ -44,7 +42,6 @@ function crearArtista() {
         });
 }
 
-// Función para buscar artistas
 function buscarArtista() {
     const searchTerm = document.getElementById('searchTerm').value.trim();
     const messageDiv = document.getElementById('searchMessage');
@@ -54,11 +51,9 @@ function buscarArtista() {
         return;
     }
 
-    // Mostrar indicador de carga
     document.getElementById('artistsContainer').innerHTML =
         '<div class="no-results">Buscando artistas...</div>';
 
-    // Realizar búsqueda
     fetch(`${BASE_PATH}/artists/search?name=${encodeURIComponent(searchTerm)}`)
         .then(response => {
             if (response.status === 404) {
@@ -67,7 +62,6 @@ function buscarArtista() {
             return response.json();
         })
         .then(data => {
-            // Manejar caso donde la API devuelve un solo objeto (no un array)
             const artists = Array.isArray(data) ? data : [data];
             mostrarArtistas(artists);
             mostrarMensaje(messageDiv, `Se encontró ${artists.length} artista(s)`, 'success');
@@ -77,18 +71,8 @@ function buscarArtista() {
             document.getElementById('artistsContainer').innerHTML =
                 '<div class="no-results">No se encontraron artistas que coincidan con la búsqueda</div>';
         });
-        fetch('/discography_war_exploded/artists/1', {
-        method: 'DELETE'
-         })
-         .then(response => {
-         if (response.status === 204) {
-         console.log('Artista eliminado correctamente');
-         }
-         });
 }
 
-
-// Función para cargar todos los artistas
 function cargarArtistas() {
     document.getElementById('artistsContainer').innerHTML =
         '<div class="no-results">Cargando artistas...</div>';
@@ -108,7 +92,7 @@ function cargarArtistas() {
 function mostrarArtistas(artists) {
     const container = document.getElementById('artistsContainer');
 
-    if (artists.length === 0) {
+    if (!artists || artists.length === 0) {
         container.innerHTML = '<div class="no-results">No hay artistas registrados</div>';
         return;
     }
@@ -126,55 +110,48 @@ function mostrarArtistas(artists) {
             <div class="artist-body">
                 <div class="artist-id">ID: ${artist.id}</div>
                 <div class="artist-tracks">
+                    <strong>Canciones:</strong><br>
                     ${artist.tracks && artist.tracks.length > 0 ?
-                        artist.tracks.map(track =>
-                            `<span class="track-tag">${track.title}</span>`).join('') :
-                        '<em>Sin canciones asignadas</em>'
-                    }
+            artist.tracks.map(track =>
+                `<span class="track-tag">${track.title}</span>`).join('<br>') :
+            '<em>Sin canciones asignadas</em>'
+        }
                 </div>
+                <button class="delete-btn" onclick="eliminarArtista(${artist.id})">Eliminar</button>
             </div>
-            
         `;
-
-        console.log('Canciones de', artist.name, artist.tracks);
         container.appendChild(card);
     });
-
 }
 
-//funcion borrar artistas
+
 function eliminarArtista(id) {
     if (!confirm('¿Estás seguro de que deseas eliminar este artista? Esta acción no se puede deshacer.')) {
         return;
     }
-    
+
     fetch(`${BASE_PATH}/artists/${id}`, {
         method: 'DELETE'
     })
-    .then(response => {
-        if (response.ok) {
-            cargarTodosLosArtistas(); 
-            alert('Artista eliminado exitosamente');
-        } else {
-            throw new Error('Error al eliminar');
-        }
-    })
-    .catch(error => {
-        alert('Error al eliminar el artista');
-    });
+        .then(response => {
+            if (response.ok) {
+                cargarArtistas();
+                alert('Artista eliminado exitosamente');
+            } else {
+                throw new Error('Error al eliminar');
+            }
+        })
+        .catch(error => {
+            alert('Error al eliminar el artista');
+        });
 }
 
-// Función para mostrar mensajes
 function mostrarMensaje(element, mensaje, tipo) {
     element.textContent = mensaje;
     element.className = `message ${tipo}`;
     element.style.display = 'block';
 
-    // Ocultar después de 5 segundos
     setTimeout(() => {
         element.style.display = 'none';
     }, 5000);
 }
-
-
-

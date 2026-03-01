@@ -1,180 +1,193 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar todos los artistas al iniciar
-    cargarTodosLosArtistas();
-    
-    // Agregar evento para Enter en el campo de búsqueda
+    cargarTodasLasCanciones();
+    cargarArtistas();
+
     document.getElementById('searchTerm').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            buscarArtista();
-        }
+        if (e.key === 'Enter') buscarCancion();
     });
 });
 
-// Función para crear un nuevo artista
-function crearArtista() {
-    const name = document.getElementById('name').value.trim();
-    const nationality = document.getElementById('nationality').value.trim();
-    const messageDiv = document.getElementById('createMessage');
-    
-    // Validación básica
-    if (!name || !nationality) {
-        mostrarMensaje(messageDiv, 'Por favor completa ambos campos', 'error');
-        return;
-    }
-    
-    // Preparar datos
-    const artistData = {
-        name: name,
-        nationality: nationality
-    };
-    
-    // Enviar a la API
-    fetch(`${BASE_PATH}/artists`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(artistData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => { throw err; });
-        }
-        return response.json();
-    })
-    .then(data => {
-        mostrarMensaje(messageDiv, `¡Artista creado exitosamente! ID: ${data.id}`, 'success');
-        
-        // Limpiar formulario
-        document.getElementById('name').value = '';
-        document.getElementById('nationality').value = '';
-        
-        // Recargar lista
-        cargarTodosLosArtistas();
-    })
-    .catch(error => {
-        const errorMsg = error.error || 'Error desconocido al crear el artista';
-        mostrarMensaje(messageDiv, errorMsg, 'error');
-    });
+function cargarArtistas() {
+    fetch(`${BASE_PATH}/artists`)
+        .then(res => res.json())
+        .then(artists => {
+            const container = document.getElementById('artistCheckboxes');
+            container.innerHTML = '';
+            artists.forEach(a => {
+                const label = document.createElement('label');
+                label.innerHTML = `<input type="checkbox" name="artist" value="${a.id}"> ${a.name}`;
+                container.appendChild(label);
+            });
+        })
+        .catch(err => console.error("Error al cargar artistas:", err));
 }
 
-// Función para buscar un artista por nombre
-function buscarArtista() {
+function getSelectedArtistIds() {
+    const checkboxes = document.querySelectorAll('#artistCheckboxes input[type="checkbox"]:checked');
+    return Array.from(checkboxes).map(cb => parseInt(cb.value));
+}
+
+function crearCancion() {
+    const title = document.getElementById('title').value.trim();
+    const genre = document.getElementById('genre').value.trim();
+    const duration = parseInt(document.getElementById('duration').value);
+    const albumTitle = document.getElementById('albumTitle').value.trim();
+    const messageDiv = document.getElementById('createMessage');
+    const artistIds = getSelectedArtistIds();
+
+    if (!title || !genre || isNaN(duration) || duration <= 0 || !albumTitle) {
+        mostrarMensaje(messageDiv, 'Por favor completa todos los campos correctamente', 'error');
+        return;
+    }
+
+    const trackData = { title, genre, duration, albumTitle, artistIds };
+
+    fetch(`${BASE_PATH}/tracks/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(trackData)
+    })
+        .then(response => {
+            if (!response.ok) return response.json().then(err => { throw err; });
+            return response.json();
+        })
+        .then(data => {
+            mostrarMensaje(messageDiv, `¡Canción creada exitosamente!`, 'success');
+            document.getElementById('title').value = '';
+            document.getElementById('genre').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('albumTitle').value = '';
+            document.querySelectorAll('#artistCheckboxes input[type="checkbox"]').forEach(cb => cb.checked = false);
+            cargarTodasLasCanciones();
+        })
+        .catch(error => {
+            mostrarMensaje(messageDiv, error.error || 'Error desconocido al crear la canción', 'error');
+        });
+}
+
+function buscarCancion() {
     const searchTerm = document.getElementById('searchTerm').value.trim();
     const messageDiv = document.getElementById('searchMessage');
-    
+
     if (!searchTerm) {
         mostrarMensaje(messageDiv, 'Por favor ingresa un término de búsqueda', 'error');
         return;
     }
-    
-    // Mostrar indicador de carga
-    document.getElementById('artistsContainer').innerHTML = 
-        '<div class="no-results">Buscando artistas...</div>';
-    
-    // Realizar búsqueda
-    fetch(`${BASE_PATH}/artists/search?name=${encodeURIComponent(searchTerm)}`)
-    .then(response => {
-        if (response.status === 404) {
-            throw new Error('Artista no encontrado');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Manejar caso donde la API devuelve un solo objeto o una lista
-        const artists = Array.isArray(data) ? data : [data];
-        mostrarArtistas(artists);
-        
-        if (artists.length > 0) {
-            mostrarMensaje(messageDiv, `Se encontraron ${artists.length} artista(s)`, 'success');
-        } else {
-            mostrarMensaje(messageDiv, 'No se encontraron artistas', 'error');
-            document.getElementById('artistsContainer').innerHTML = 
-                '<div class="no-results">No se encontraron artistas que coincidan con la búsqueda</div>';
-        }
-    })
-    .catch(error => {
-        mostrarMensaje(messageDiv, error.message || 'Error en la búsqueda', 'error');
-        document.getElementById('artistsContainer').innerHTML = 
-            '<div class="no-results">Error al realizar la búsqueda</div>';
-    });
+
+    document.getElementById('tracksContainer').innerHTML = '<div class="no-results">Buscando canciones...</div>';
+
+    fetch(`${BASE_PATH}/tracks/search?title=${encodeURIComponent(searchTerm)}`)
+        .then(response => {
+            if (response.status === 404) throw new Error('No se encontraron canciones');
+            return response.json();
+        })
+        .then(data => {
+            const tracks = Array.isArray(data) ? data : [data];
+            mostrarCanciones(tracks);
+
+            if (tracks.length > 0) mostrarMensaje(messageDiv, `Se encontraron ${tracks.length} canción(es)`, 'success');
+            else {
+                mostrarMensaje(messageDiv, 'No se encontraron canciones', 'error');
+                document.getElementById('tracksContainer').innerHTML = '<div class="no-results">No se encontraron canciones que coincidan con la búsqueda</div>';
+            }
+        })
+        .catch(error => {
+            mostrarMensaje(messageDiv, error.message || 'Error en la búsqueda', 'error');
+            document.getElementById('tracksContainer').innerHTML = '<div class="no-results">Error al realizar la búsqueda</div>';
+        });
 }
 
-// Función para cargar todos los artistas
-function cargarTodosLosArtistas() {
-    document.getElementById('artistsContainer').innerHTML = 
-        '<div class="no-results">Cargando artistas...</div>';
-    
-    fetch(`${BASE_PATH}/artists`)
-    .then(response => response.json())
-    .then(artists => {
-        mostrarArtistas(artists);
-    })
-    .catch(error => {
-        console.error('Error cargando artistas:', error);
-        document.getElementById('artistsContainer').innerHTML = 
-            '<div class="no-results">Error al cargar los artistas</div>';
-    });
+function cargarTodasLasCanciones() {
+    document.getElementById('tracksContainer').innerHTML = '<div class="no-results">Cargando canciones...</div>';
+
+    fetch(`${BASE_PATH}/tracks`)
+        .then(response => response.json())
+        .then(tracks => mostrarCanciones(tracks))
+        .catch(error => {
+            console.error('Error cargando canciones:', error);
+            document.getElementById('tracksContainer').innerHTML = '<div class="no-results">Error al cargar las canciones</div>';
+        });
 }
 
-// Función para eliminar un artista
-function eliminarArtista(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este artista? Esta acción no se puede deshacer.')) {
+function eliminarCancion(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta canción? Esta acción no se puede deshacer.')) {
         return;
     }
-    
-    fetch(`${BASE_PATH}/artists/${id}`, {
-        method: 'DELETE'
-    })
-    .then(response => {
+
+
+    fetch(`${BASE_PATH}/tracks/delete/${id}`, {
+        method: 'POST'
+    }).then(response => {
         if (response.ok) {
-            cargarTodosLosArtistas(); // Recargar lista
-            alert('Artista eliminado exitosamente');
+            cargarTodasLasCanciones();
+            alert('Canción eliminada exitosamente');
         } else {
             throw new Error('Error al eliminar');
         }
     })
-    .catch(error => {
-        alert('Error al eliminar el artista');
-    });
+        .catch(error => {
+            alert('Error al eliminar la canción');
+        });
 }
 
-// Función para mostrar artistas en la interfaz
-function mostrarArtistas(artists) {
-    const container = document.getElementById('artistsContainer');
-    
-    if (!artists || artists.length === 0) {
-        container.innerHTML = '<div class="no-results">No hay artistas registrados</div>';
+function mostrarCanciones(tracks) {
+    const container = document.getElementById('tracksContainer');
+    if (!tracks || tracks.length === 0) {
+        container.innerHTML = '<div class="no-results">No hay canciones registradas</div>';
         return;
     }
-    
+
     container.innerHTML = '';
-    
-    artists.forEach(artist => {
+
+    tracks.forEach(track => {
         const card = document.createElement('div');
-        card.className = 'artist-card';
+        card.className = 'track-card';
         card.innerHTML = `
-            <div class="artist-header">
-                <div class="artist-name">${artist.name}</div>
-                <div class="artist-nationality">${artist.nationality}</div>
+            <div class="track-header">
+                <div class="track-title">${track.title}</div>
+                <div class="track-album">${track.albumTitle}</div>
             </div>
-            <div class="artist-body">
-                <div class="artist-id">ID: ${artist.id}</div>
-                <button class="delete-btn" onclick="eliminarArtista(${artist.id})">Eliminar</button>
+            <div class="track-body">
+                <div class="track-info">
+                    <div class="track-label">Género</div>
+                    <div class="track-value">${track.genre}</div>
+                </div>
+                <div class="track-info">
+                    <div class="track-label">Duración</div>
+                    <div class="track-value">${formatDuration(track.durationInSeconds)}</div>
+                </div>
+                <div class="track-info">
+                    <div class="track-label">ID</div>
+                    <div class="track-value">${track.id}</div>
+                </div>
+                <div class="track-info">
+                    <div class="track-label">Cantantes</div>
+                    <div class="track-value">
+                        ${track.singers && track.singers.length > 0
+            ? `<div class="track-singers">${track.singers.map(s => `<span class="singer-tag">${s.name}</span>`).join('')}</div>`
+            : '<em>Sin cantantes asignados</em>'}
+                    </div>
+                </div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <button class="delete" onclick="eliminarCancion(${track.id})">Eliminar</button>
+                </div>
             </div>
         `;
         container.appendChild(card);
     });
 }
 
-// Función para mostrar mensajes
+function formatDuration(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
 function mostrarMensaje(element, mensaje, tipo) {
     element.textContent = mensaje;
     element.className = `message ${tipo}`;
     element.style.display = 'block';
-    
-    // Ocultar después de 5 segundos
+
     setTimeout(() => {
         element.style.display = 'none';
     }, 5000);

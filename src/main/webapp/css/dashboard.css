@@ -12,6 +12,17 @@ body {
     padding: 20px;
 }
 
+.track-tag {
+    background: #27ae60;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin: 2px;
+    display: inline-block;
+}
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

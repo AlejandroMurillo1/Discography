@@ -78,6 +78,9 @@
   </footer>
 </div>
 
+<script>
+  const BASE_PATH = '${pageContext.request.contextPath}';
+</script>
 <script src="${pageContext.request.contextPath}/js/artists.js"></script>
 
 </body>

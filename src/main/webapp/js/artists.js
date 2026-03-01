@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarArtistas();
 });
 
-// Función para crear un nuevo artista
 function crearArtista() {
     const name = document.getElementById('name').value.trim();
     const nationality = document.getElementById('nationality').value.trim();
@@ -20,7 +19,6 @@ function crearArtista() {
         nationality: nationality
     };
 
-    // Enviar a la API
     fetch('/discography_war_exploded/artists/create', {
         method: 'POST',
         headers: {
@@ -61,7 +59,7 @@ function buscarArtista() {
         '<div class="no-results">Buscando artistas...</div>';
 
     // Realizar búsqueda
-    fetch(`/discography_war_exploded/artists/search?name=${encodeURIComponent(searchTerm)}`)
+    fetch(`${BASE_PATH}/artists/search?name=${encodeURIComponent(searchTerm)}`)
         .then(response => {
             if (response.status === 404) {
                 throw new Error('Artista no encontrado');
@@ -95,7 +93,7 @@ function cargarArtistas() {
     document.getElementById('artistsContainer').innerHTML =
         '<div class="no-results">Cargando artistas...</div>';
 
-    fetch('/discography_war_exploded/artists')
+    fetch(`${BASE_PATH}/artists`)
         .then(response => response.json())
         .then(artists => {
             mostrarArtistas(artists);
@@ -107,7 +105,6 @@ function cargarArtistas() {
         });
 }
 
-// Función para mostrar artistas en la interfaz
 function mostrarArtistas(artists) {
     const container = document.getElementById('artistsContainer');
 
@@ -128,10 +125,21 @@ function mostrarArtistas(artists) {
             </div>
             <div class="artist-body">
                 <div class="artist-id">ID: ${artist.id}</div>
+                <div class="artist-tracks">
+                    ${artist.tracks && artist.tracks.length > 0 ?
+                        artist.tracks.map(track =>
+                            `<span class="track-tag">${track.title}</span>`).join('') :
+                        '<em>Sin canciones asignadas</em>'
+                    }
+                </div>
             </div>
+            
         `;
+
+        console.log('Canciones de', artist.name, artist.tracks);
         container.appendChild(card);
     });
+
 }
 
 //funcion borrar artistas

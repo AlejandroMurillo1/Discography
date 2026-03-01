@@ -79,8 +79,6 @@ function buscarArtista() {
             document.getElementById('artistsContainer').innerHTML =
                 '<div class="no-results">No se encontraron artistas que coincidan con la búsqueda</div>';
         });
-
-        
         fetch('/discography_war_exploded/artists/1', {
         method: 'DELETE'
          })
@@ -88,7 +86,7 @@ function buscarArtista() {
          if (response.status === 204) {
          console.log('Artista eliminado correctamente');
          }
-        });
+         });
 }
 
 
@@ -133,6 +131,28 @@ function mostrarArtistas(artists) {
             </div>
         `;
         container.appendChild(card);
+    });
+}
+
+//funcion borrar artistas
+function eliminarArtista(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar este artista? Esta acción no se puede deshacer.')) {
+        return;
+    }
+    
+    fetch(`${BASE_PATH}/artists/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            cargarTodosLosArtistas(); 
+            alert('Artista eliminado exitosamente');
+        } else {
+            throw new Error('Error al eliminar');
+        }
+    })
+    .catch(error => {
+        alert('Error al eliminar el artista');
     });
 }
 

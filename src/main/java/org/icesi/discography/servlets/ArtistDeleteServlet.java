@@ -30,7 +30,6 @@ public class ArtistDeleteServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
         
-        
         String pathInfo = req.getPathInfo();
         
         if (pathInfo == null || pathInfo.equals("/")) {
@@ -40,13 +39,8 @@ public class ArtistDeleteServlet extends HttpServlet {
         }
 
         try {
-            // 2. Convertir ID de String a Long
             long id = Long.parseLong(pathInfo.substring(1));
-            
-            // 3. Eliminar artista usando tu lógica de negocio
             artistService.deleteArtistById(id);
-            
-            // 4. Respuesta exitosa (204 No Content)
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             
         } catch (NumberFormatException e) {

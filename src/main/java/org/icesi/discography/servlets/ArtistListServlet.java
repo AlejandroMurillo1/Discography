@@ -59,44 +59,4 @@ public class ArtistListServlet extends HttpServlet {
         }
     }
 
-    // DELETE borrar artistas por id
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-        String pathInfo = req.getPathInfo();
-        if (pathInfo == null || pathInfo.equals("/")) {
-            return;
-        }
-
-        try {
-
-            long id = Long.parseLong(pathInfo.substring(1));
-            artistService.deleteArtistById(id);
-
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-
-        } catch (NumberFormatException e) {
-            sendError(resp, HttpServletResponse.SC_BAD_REQUEST,
-                    "ID inválido (debe ser numérico)", e);
-        } catch (IllegalArgumentException e) {
-            sendError(resp, HttpServletResponse.SC_NOT_FOUND,
-                    e.getMessage(), e);
-        }
-    }
-
-    private void sendError(HttpServletResponse resp, int status, String message, Exception e)
-            throws IOException {
-
-        resp.setStatus(status);
-        resp.setContentType("application/json");
-
-        JsonObject error = new JsonObject();
-        error.addProperty("error", message);
-        error.addProperty("details", e != null ? e.getMessage() : "N/A");
-
-        resp.getWriter().write(gson.toJson(error));
-    }
-
-
 }

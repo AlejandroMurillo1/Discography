@@ -79,7 +79,18 @@ function buscarArtista() {
             document.getElementById('artistsContainer').innerHTML =
                 '<div class="no-results">No se encontraron artistas que coincidan con la búsqueda</div>';
         });
+
+        
+        fetch('/discography_war_exploded/artists/1', {
+        method: 'DELETE'
+         })
+         .then(response => {
+         if (response.status === 204) {
+         console.log('Artista eliminado correctamente');
+         }
+        });
 }
+
 
 // Función para cargar todos los artistas
 function cargarArtistas() {
@@ -136,4 +147,6 @@ function mostrarMensaje(element, mensaje, tipo) {
         element.style.display = 'none';
     }, 5000);
 }
+
+
 

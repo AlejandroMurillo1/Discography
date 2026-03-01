@@ -102,6 +102,19 @@ button:hover {
     background: #2980b9;
 }
 
+
+.delete-btn {
+    background: #e74c3c !important;
+    width: auto !important;
+    padding: 8px 15px !important;
+    font-size: 12px !important;
+    margin-top: 15px !important;
+}
+
+.delete-btn:hover {
+    background: #c0392b !important;
+}
+
 .search-box {
     display: flex;
     gap: 10px;

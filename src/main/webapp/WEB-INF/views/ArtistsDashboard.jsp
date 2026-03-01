@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discografía - Gestión de Artistas</title>
 
-  <link rel="stylesheet"
-        href="${pageContext.request.contextPath}/css/dashboard.css">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+
+  <!-- Favicon opcional -->
+  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
 </head>
 <body>
-
 <div class="container">
   <header>
     <h1>Discografía</h1>
@@ -37,12 +39,12 @@
       <div id="createMessage" class="message"></div>
     </div>
 
-    <!-- PANEL BUSCAR ARTISTA -->
+    <!-- PANEL BUSCAR Y LISTAR ARTISTAS -->
     <div class="panel">
       <h2>Buscar Artista</h2>
 
       <div class="search-input-group">
-        <label for="searchTerm"></label><input
+        <input
                 type="text"
                 id="searchTerm"
                 placeholder="Escribe aquí para buscar por nombre..."
@@ -59,8 +61,7 @@
         </button>
       </div>
 
-      <div class="search-hint"
-           style="margin-top: 10px; color: #7f8c8d; font-size: 0.9rem;">
+      <div class="search-hint" style="margin-top: 10px; color: #7f8c8d; font-size: 0.9rem;">
         Ejemplos: "Bad" para encontrar "Bad Bunny", "sha" para "Shakira"
       </div>
 
@@ -68,7 +69,7 @@
 
       <h2>Lista de Artistas</h2>
       <div id="artistsContainer" class="artists-list">
-        <!-- Los artistas se cargarán aquí dinámicamente -->
+
       </div>
     </div>
   </div>
@@ -78,7 +79,9 @@
   </footer>
 </div>
 
+<script>
+    const BASE_PATH = '${pageContext.request.contextPath}';
+</script>
 <script src="${pageContext.request.contextPath}/js/artists.js"></script>
-
 </body>
 </html>

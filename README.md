@@ -32,23 +32,23 @@ org.icesi.discography
 ├── servlets
 └── utils
 
-#### config
+#### Config
 Contiene la configuración de Spring:
 * AppConfiguration.java
 * Initializer.java
-#### models
+#### Models
 Clases del dominio:
 * Artist
 * Track
-#### repositories
+#### Repositories
 Manejo de datos en memoria:
 * ArtistRepository
 * TrackRepository
-#### services
+#### Services
 Lógica de negocio:
 * ArtistService
 * TrackService
-#### servlets
+#### Servlets
 Controladores que manejan las peticiones HTTP:
 * ArtistCreateServlet
 * ArtistDeleteServlet
@@ -60,7 +60,7 @@ Controladores que manejan las peticiones HTTP:
 * TrackDeleteServlet
 * TrackListServlet
 * TrackSearchServlet
-#### utils
+#### Utils
 * DataLoader
 * DataWrapper
 * Carga de datos desde data.json
@@ -160,13 +160,21 @@ http://localhost:8080/discography-1.0-SNAPSHOT/
 
 ### Tecnologías Utilizadas
 
-* Java 17
-* Jakarta Servlet
+* JDK 17
+* Jakarta Servlet API
 * Spring Framework
 * Maven
-* JSP
-* JSON
-* Tomcat
+* Archivos JSP
+* Serialización / Deserialización de datos con Gson
+* Apache Tomcat
+
+<h3><strong>Versiones del Proyecto</strong></h3>
+<p>Las versiones del proyecto están manejadas en distintas ramas disponibles en el repositorio.</p>
+<ul>
+  <li>Annotations: Rama <strong>main</strong></li>
+  <li>XmlConfiguration: Rama <strong>xmlConfig</strong></li>
+  <li>Config desde archivo: Rama <strong>appConfig</strong></li>
+</ul>
 
 Nota para el profesor:
 

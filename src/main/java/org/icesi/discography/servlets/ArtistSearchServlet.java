@@ -25,8 +25,8 @@ public class ArtistSearchServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        ApplicationContext context = WebApplicationContextUtils
-                .getRequiredWebApplicationContext(getServletContext());
+        ApplicationContext context =
+                (ApplicationContext) getServletContext().getAttribute("springContext");
         artistService = context.getBean(ArtistService.class);
     }
 
@@ -53,7 +53,6 @@ public class ArtistSearchServlet extends HttpServlet {
         try {
 
             List<Artist> artists = artistService.searchArtists(name);
-
 
             resp.setContentType("application/json");
             resp.getWriter().write(gson.toJson(artists));

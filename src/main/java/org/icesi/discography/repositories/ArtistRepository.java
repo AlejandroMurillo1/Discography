@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
 public class ArtistRepository {
 
     private final List<Artist> artists = new ArrayList<>();
     private long currentArtistId = 0;
+
+    public ArtistRepository() {}
 
     public List<Artist> getAllArtists() {
         return artists;

@@ -15,19 +15,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Component
 public class DataLoader {
-    private final ArtistRepository artistRepository;
-    private final TrackRepository trackRepository;
+    private ArtistRepository artistRepository;
+    private TrackRepository trackRepository;
     private final Gson gson = new Gson();
 
-    @Autowired
     public DataLoader(ArtistRepository ar, TrackRepository tr){
         this.artistRepository = ar;
         this.trackRepository = tr;
     }
 
-    @PostConstruct
+    public DataLoader(){}
+
     public void init(){
         boolean success = loadData();
         if(success){
@@ -66,11 +65,11 @@ public class DataLoader {
         return result;
     }
 
-    public ArtistRepository getArtistRepository() {
-        return artistRepository;
+    public void setTrackRepository(TrackRepository trackRepository) {
+        this.trackRepository = trackRepository;
     }
 
-    public TrackRepository getTrackRepository() {
-        return trackRepository;
+    public void setArtistRepository(ArtistRepository artistRepository) {
+        this.artistRepository = artistRepository;
     }
 }

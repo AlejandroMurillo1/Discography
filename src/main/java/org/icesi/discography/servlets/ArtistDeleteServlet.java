@@ -21,8 +21,8 @@ public class ArtistDeleteServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        ApplicationContext context = WebApplicationContextUtils
-                .getRequiredWebApplicationContext(getServletContext());
+        ApplicationContext context =
+                (ApplicationContext) getServletContext().getAttribute("springContext");
         artistService = context.getBean(ArtistService.class);
     }
 

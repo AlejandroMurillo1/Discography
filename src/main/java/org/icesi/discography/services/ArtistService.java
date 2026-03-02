@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class ArtistService {
 
-    private final ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
-    @Autowired
     public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }
+
+    public ArtistService() {}
 
     public List<Artist> getAllArtists() {
         return artistRepository.getAllArtists();
@@ -50,4 +50,7 @@ public class ArtistService {
         return artistRepository.getArtisAndTracksByName(name);
     }
 
+    public void setArtistRepository(ArtistRepository artistRepository) {
+        this.artistRepository = artistRepository;
+    }
 }

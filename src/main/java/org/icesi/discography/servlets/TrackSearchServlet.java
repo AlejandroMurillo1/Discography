@@ -24,8 +24,8 @@ public class TrackSearchServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        ApplicationContext context = WebApplicationContextUtils
-                .getRequiredWebApplicationContext(getServletContext());
+        ApplicationContext context =
+                (ApplicationContext) getServletContext().getAttribute("springContext");
         trackService = context.getBean(TrackService.class);
     }
 

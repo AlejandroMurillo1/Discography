@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
 public class TrackRepository {
 
     private final List<Track> tracks = new ArrayList<>();
     private long currentTrackId = 0;
+
+    public TrackRepository() {}
 
     public List<Track> getAllTracks() {
         return tracks;

@@ -10,5 +10,16 @@
     <bean id="trackRepository" class="org.icesi.discography.repositories.TrackRepository">
 
     </bean>
+    <bean id="artistService" class="org.icesi.discography.services.ArtistService">
+        <property name="artistRepository" ref="artistRepository"/>
+    </bean>
+    <bean id="trackService" class="org.icesi.discography.services.TrackService">
+        <property name="trackRepository" ref="trackRepository"/>
+        <property name="artistService" ref="artistService"/>
+    </bean>
+    <bean id="dataLoader" class="org.icesi.discography.utils.DataLoader" init-method="init">
+        <property name="trackRepository" ref="trackRepository"/>
+        <property name="artistRepository" ref="artistRepository"/>
+    </bean>
 
 </beans>

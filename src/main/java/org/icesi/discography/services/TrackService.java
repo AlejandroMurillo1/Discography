@@ -10,17 +10,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class TrackService {
 
-    private final TrackRepository trackRepository;
-    private final ArtistService artistService;
+    private TrackRepository trackRepository;
+    private ArtistService artistService;
 
-    @Autowired
     public TrackService(TrackRepository trackRepository, ArtistService artistService) {
         this.trackRepository = trackRepository;
         this.artistService = artistService;
     }
+
+    public TrackService() {}
 
     public List<Track> getTracks() {
         return trackRepository.getAllTracks();
@@ -53,4 +53,11 @@ public class TrackService {
         trackRepository.assignArtistsToTrack(artists,toUpdate);
     }
 
+    public void setArtistService(ArtistService artistService) {
+        this.artistService = artistService;
+    }
+
+    public void setTrackRepository(TrackRepository trackRepository) {
+        this.trackRepository = trackRepository;
+    }
 }

@@ -15,13 +15,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Component
 public class DataLoader {
     private final ArtistRepository artistRepository;
     private final TrackRepository trackRepository;
     private final Gson gson = new Gson();
 
-    @Autowired
     public DataLoader(ArtistRepository ar, TrackRepository tr){
         this.artistRepository = ar;
         this.trackRepository = tr;

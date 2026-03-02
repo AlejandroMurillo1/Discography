@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
 public class TrackRepository {
 
     private final List<Track> tracks = new ArrayList<>();
@@ -39,7 +38,10 @@ public class TrackRepository {
 
     public void assignArtistsToTrack(List<Artist> artists, Track track){
         List<Artist> trackArtists = track.getSingers();
-        trackArtists.addAll(artists);
+        List<Artist> updated = new ArrayList<>(trackArtists);
+
+        updated.addAll(artists);
+        track.setSingers(updated);
     }
 
 }

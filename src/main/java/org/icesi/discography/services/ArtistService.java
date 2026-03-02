@@ -7,12 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
 
-    @Autowired
     public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }

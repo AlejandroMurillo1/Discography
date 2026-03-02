@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
 public class ArtistRepository {
 
     private final List<Artist> artists = new ArrayList<>();

@@ -10,13 +10,11 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class TrackService {
 
     private final TrackRepository trackRepository;
     private final ArtistService artistService;
 
-    @Autowired
     public TrackService(TrackRepository trackRepository, ArtistService artistService) {
         this.trackRepository = trackRepository;
         this.artistService = artistService;
